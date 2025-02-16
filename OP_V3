@@ -96,7 +96,7 @@ local function jumpAndStartFarm()
 end
 
 local function onTeleportCompleted()
-    showNotification("Hedef oyuna teleport edildiniz. Botlar siliniyor ve farma başlıyor.", 3)
+    showNotification("Hedef oyuna teleport  sa edildiniz. Botlar siliniyor ve farma başlıyor.", 3)
     deleteBots()
     wait(1) -- Botların silinmesi için kısa bir süre bekleyin
     jumpAndStartFarm()
