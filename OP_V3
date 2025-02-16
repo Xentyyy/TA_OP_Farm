@@ -115,10 +115,21 @@ end
 -- Kontrolü başlat
 checkAndTeleport()
 
--- Bu kısmı ekleyerek, geri dönüldükten sonra otomatik tekrar başlatılmasını sağlıyoruz.
+-- Buradaki bekleme süresi ile oyunun stabil olduğundan emin olunacak
 game:GetService("Players").PlayerAdded:Connect(function()
     if game.PlaceId == returnPlaceId then
-        wait(5) -- Geri döndükten sonra kısa bir bekleme süresi
-        checkAndTeleport() -- Tekrar kontrol et ve gerekiyorsa ışınla
+        -- Geri dönüldükten sonra 10 saniye bekleyerek stabil hale gelmesini bekliyoruz
+        wait(10)  -- Bekleme süresi 10 saniye olarak güncellendi
+        checkAndTeleport()  -- Tekrar kontrol et ve gerekiyorsa ışınla
     end
 end)
+
+-- Aynı zamanda sürekli olarak kontrol eden döngü ekleyelim
+while true do
+    wait(5) -- 5 saniyede bir geri dönüldü mü kontrol et
+    if game.PlaceId == returnPlaceId then
+        -- Eğer doğru yerdesek, tekrar çalıştır
+        print("Geri dönüldü. Script tekrar başlatılıyor.")
+        checkAndTeleport() -- Tekrar ışınlama kontrolü yapılır
+    end
+end
